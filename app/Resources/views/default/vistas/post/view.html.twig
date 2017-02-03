@@ -1,0 +1,71 @@
+{% extends '::newadmin.html.twig' %}
+{% block title %}Ver Post{% endblock %}
+{% block class 'fixed-left login-page' %}
+{% block body %}
+    {{ parent() }}
+    {% block content %}
+        <div class="content-page">
+            <!-- ============================================================== -->
+            <!-- Start Content here -->
+            <!-- ============================================================== -->
+            <div class="content">
+                <!-- Page Heading Start -->
+                <div class="page-heading">
+                    <h1><i class='fa fa-magic'></i> Ver Post</h1>
+                    <h3></h3>            	</div>
+                <!-- Page Heading End-->
+                <div class="row">
+                    <div class="col-md-12 portlets">
+                        <!-- Your awesome content goes here -->
+
+                        <div class="container">
+                            <div class="content">
+                                <div class="single-page">
+                                    <div class="print-main">
+                                        <h3>{{ post.titulo }}</h3>
+                                        <a href="#">Software Review: Autodesk Inventor Fusion for Mac</a>
+                                        <p class="sub_head">Posteado por<a href="#">{{ post.postuser.username }} : Admin</a> {{ post.fechaPublicacion |date('Y-m-d H:i:s') }}</p>
+                                        <li><img src="../uploads/{{ post.imagen }}" class="img-responsive" alt="Foto" /></li>
+                                        <p class="span"><a href="#">3D Printing, <a href="#">3D Software,</a><a href="#"> Files to Print </a> | {{ post.fechaPublicacion |date('Y-m-d H:i:s') }}</p>
+                                        <p class="ptext">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose injected humour and the like</p>
+                                        <p class="ptext">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose injected humour and the like</p>
+                                    </div>
+                                    <td>
+                                            <a href="{{ path('newedit',{id: post.id }) }}" type="button" class="btn btn-primary btn-lg">Editar</a>
+
+                                    </td>
+                                    <td> {{ include('default/vistas/form.html.twig',{form: delete_form , message:'Estas seguro de borrar este post?'}) }}</td>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Start -->
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End content here -->
+        <!-- ============================================================== -->
+
+        </div>
+        <!-- End right content -->
+
+        </div>
+        <!-- End of page -->
+        <!-- the overlay modal element -->
+        <div class="md-overlay"></div>
+        <!-- End of eoverlay modal -->
+        <script>
+            var resizefunc = [];
+        </script>
+    {% endblock %}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+{% endblock %}

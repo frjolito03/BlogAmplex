@@ -1,0 +1,134 @@
+{% extends '::newadmin.html.twig' %}
+{% block title %}Registro de Usuario{% endblock %}
+{% block class 'fixed-left login-page' %}
+{% block body %}
+    {{ parent() }}
+    {% block content %}
+
+
+
+        <div class="content-page">
+            <!-- ============================================================== -->
+            <!-- Start Content here -->
+            <!-- ============================================================== -->
+            <div class="content">
+                <!-- Page Heading Start -->
+
+
+        <section class="jumbotron" style="background:#fff; padding: 20px 0; margin-bottom: 0;">
+            <div class="container" style="color:#428bca;">
+                <a class="navbar-brand" rel="home" href="#" title="Su Aliado tecnologico">
+                </a>
+                <div class="page-header">
+                    <h1>Registro de Usuario
+                        <small>Su aliado tecnologico</small>
+                    </h1>
+                </div>
+
+            </div>
+        </section>
+
+        {% if app.session.flashBag.has('error') %}
+            <div class="alert alert-danger" style="width: 30%; margin: auto; margin-bottom: 20px;">
+                {% for msg in app.session.flashBag.get('error') %}
+                    {{ msg }}
+                {% endfor %}
+            </div>
+        {% endif %}
+                {% if app.session.flashBag.has('EXITO') %}
+                    <div class="alert alert-success" style="width: 30%; margin: auto; margin-bottom: 20px;">
+                            {{ msg }}
+                    </div>
+                {% endif %}
+        {% if app.session.flashBag.has('error2') %}
+            <div class="alert alert-danger" style="width: 30%; margin: auto; margin-bottom: 20px;">
+                {% for msg2 in app.session.flashBag.get('error2') %}
+                    {{ msg2 }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Main Content -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <form action="{{ path('register') }}" method="post" role="form">
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label>ID Usuario</label>
+                                    {{ form_widget(form.userid,{'attr':{'class':'form-control','placeholder':'como los demas te veran'}}) }}
+                                    <span class="text-danger">  {{ form_errors(form.userid) }} </span>
+                                </div>
+                            </div>
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label>Nombre</label>
+                                    {{ form_widget(form.username,{'attr':{'class':'form-control','placeholder':'su nombre'}}) }}
+                                    <span class="text-danger">  {{ form_errors(form.username) }} </span>
+                                </div>
+                            </div>
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label>Email</label>
+                                    {{ form_widget(form.email,{'attr':{'class':'form-control','placeholder':'indigue su correo'}}) }}
+                                    <span class="text-danger">  {{ form_errors(form.email) }} </span>
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <label>ingrese su contraseña</label>
+                    {{ form_widget(form.password,{'attr':{'class':'form-control','placeholder':'indigue su contraseña'}}) }}
+                    <span class="text-danger">  {{ form_errors(form.password) }} </span>
+                </div>
+            </div>
+            <div class="row control-group">
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <label>ingrese su Role</label>
+                    {{ form_widget(form.role,{'attr':{'class':'form-control','placeholder':'indigue su Role'}}) }}
+                    <span class="text-danger">  {{ form_errors(form.role) }} </span>
+                </div>
+            </div>
+            {{ form_widget(form._token,{'attr':{'class':'form-control'} ,'type':'hidden' }) }}
+            <br>
+            <div id="success"></div>
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    {{ form_widget(form.save,{'label':'Registrar','attr':{'class':'btn btn-info'}}) }}
+                </div>
+            </div>
+            </form>
+            {{ form_end(form) }}
+        </div>
+        </div>
+        </div>
+
+
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End content here -->
+        <!-- ============================================================== -->
+
+        </div>
+        <!-- End right content -->
+
+        </div>
+        <!-- End of page -->
+        <!-- the overlay modal element -->
+        <div class="md-overlay"></div>
+        <!-- End of eoverlay modal -->
+        <script>
+            var resizefunc = [];
+        </script>
+
+
+
+
+    {% endblock %}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+{% endblock %}

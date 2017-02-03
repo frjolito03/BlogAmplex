@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+{% endblock %}
+
+{% block container %}
+    <!-- script for menu -->
+    <div class="container">
+        <div class="content">
+            <div class="single-page">
+                <div class="print-main">
+                    <h3>{{ post.titulo }}</h3>
+                    <a href="single.html">Software Review: Autodesk Inventor Fusion for Mac</a>
+                    <p class="sub_head">Subido por <a href="#">Admin</a> {{ post.fechaPublicacion|date('short') }}</p>
+                    <a href="single.html"><img src="../uploads/{{ post.imagen }}" class="img-responsive" alt="" /></a>
+                    <p class="span"><a href="#">3D Printing, <a href="#">3D Software,</a><a href="#"> Files to Print </a> |  on february 14,2015</p>
+                    <p class="ptext">{{ post.contenido }}</p>
+                </div>
+
+            </div>
+            <div class="col-md-7 single-content-left">
+                <div class="features-list">
+                    <h3>Recientes</h3>
+                    <ul>
+                        {% for recientes in recientes %}
+                            <li><a href="{{ path('printig', {'id': recientes.id}) }}">{{ recientes.titulo }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="single">
+                    <div class="leave">
+                        <h4>Dejar su Comentario</h4>
+                    </div>
+                    <form id="commentform" METHOD="post" action="{{ path('printig', {'id': post.id}) }}">
+                        <p class="comment-form-email">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="text" value="" size="30" aria-required="true">
+                        </p>
+                        <p class="comment-form-comment">
+                            <label for="comment">Comentario</label>
+                            <textarea name="texto" id="texto"></textarea>
+                        </p>
+                        <div class="clearfix"></div>
+                        <p class="form-submit">
+                            <input name="submit" type="submit" id="submit" value="Enviar">
+                        </p>
+                        <div class="clearfix"></div>
+                    </form>
+                    <div class="comments1">
+                        <h4>COMENTARIOS</h4>
+    {% for comentario in comentario %}
+                        <div class="comments-main">
+                            <div class="col-md-3 cmts-main-left">
+                                <img src="images/avatar.jpg" alt="">
+                            </div>
+                            <div class="col-md-9 cmts-main-right">
+                                <h5>anonimus</h5>
+                                <p>{{ comentario.comment }}</p>
+                                <div class="cmts">
+                                    <div class="col-md-6 cmnts-left">
+                                        <p>{{ comentario.date|date('short') }}</p>
+                                    </div>
+                                    {#<div class="col-md-6 cmnts-right">
+                                        <a href="#">Reply</a>
+                                    </div>#}
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+    {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 content-right content-right-top">
+                <h5 class="head">Popular</h5>
+    {% for popular in popular %}
+                <a href="{{ path('printig', {'id': popular.id}) }}">
+                    <div class="editor text-center">
+                        <h3>{{ popular.titulo }}</h3>
+                        <p>{{ popular.contenido }}</p>
+                        <label>{{ popular.FechaPublicacion|date('short') }}</label>
+                        <span></span>
+                    </div>
+                </a>
+    {% endfor %}
+
+
+                <div class="editors-pic-grids">
+                    <h5>Seleccion de los Editores</h5>
+
+    {% for editores in editores %}
+                    <div class="editors-pic">
+                        <div class="e-pic">
+                            <a href="single.html"><img src="../uploads/{{ editores.imagen }}" alt="" /></a>
+                        </div>
+                        <div class="e-pic-info">
+                            <a href="single.html">{{ editores.titulo }}</a>
+                            <span></span>
+                            <label>{{ editores.FechaPublicacion|date('short') }}</label>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+{% endblock %}

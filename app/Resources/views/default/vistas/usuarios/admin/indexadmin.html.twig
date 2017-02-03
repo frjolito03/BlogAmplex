@@ -1,0 +1,36 @@
+{% extends '::newadmin.html.twig' %}
+{% block title %}Index{% endblock %}
+{% block class 'fixed-left login-page' %}
+{% block body %}
+    {{ parent() }}
+    {% block content %}
+
+        <div class="content-page">
+            <!-- ============================================================== -->
+            <!-- Start Content here -->
+            <!-- ============================================================== -->
+            <div class="content">
+                <!-- Page Heading Start -->
+                <div class="page-heading">
+                    <h1><i class='fa fa-file'></i> Calendario de Contenido</h1>
+                </div>
+                <iframe src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showCalendars=0&amp;
+                showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=4j0nm65ap843beu8pksvu91cl0%40group.calendar.google.com&amp;
+                color=%2342104A&amp;ctz=America%2FCaracas"
+                        style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End content here -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- End right content -->
+
+    {% endblock %}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+{% endblock %}

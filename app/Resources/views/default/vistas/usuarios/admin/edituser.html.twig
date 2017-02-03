@@ -1,0 +1,144 @@
+{% extends '::newadmin.html.twig' %}
+{% block title %}Lista Genaral de Post{% endblock %}
+{% block class 'fixed-left login-page' %}
+{% block body %}
+    {{ parent() }}
+    {% block content %}
+
+        <div class="content-page">
+            <!-- ============================================================== -->
+            <!-- Start Content here -->
+            <!-- ============================================================== -->
+            <div class="content">
+                <!-- Page Heading Start -->
+                <div class="page-heading">
+                    <h1><i class='fa fa-check'></i> Editar Usuario </h1>
+                </div>
+                <!-- Page Heading End-->
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="flash-notice alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <strong>{{ flashMessage }}</strong>
+                    </div>
+                {% endfor %}
+                <!-- Your awesome content goes here -->
+                <form action="{{ path('edituser',{id: user.id }) }}" method="post" role="form"
+                      enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-sm-12 portlets">
+
+                            <div class="widget">
+                                <div class="widget-header">
+                                    <h2><strong>Datos del </strong>Usuario</h2>
+                                    <div class="additional-btn">
+                                        <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                                        <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                                        <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                                    </div>
+                                </div>
+                                <div class="widget-content padding">
+                                    <p>Haz click Para Editar los Campos</p>
+                                    <table id="user" class="table table-bordered table-striped" style="clear: both">
+                                        <tbody>
+
+
+                                        <tr>
+                                            <td width="35%"> Nombre</td>
+                                            <td width="65%"><input name="nombre" id="nombre" value="{{ user.username }}"
+                                                                   placeholder="" data-type="text" data-pk="1"
+                                                                   data-title="titulo"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="35%"> <strong>email</strong>
+                                                (<p>
+                                                    Le recordamos que su correo al ser editado
+                                                    una vez ya creado debido a que esto Podria ocasionar problemas si ya
+                                                    tiene Mensajes nuevos en su Bandeja de entrada o anteriores estos se perderan
+                                                </p>)
+                                            </td>
+                                            <td width="65%"><input name="email" id="email" value="{{ user.email }}"
+                                                                   placeholder="" data-type="text" data-pk="1"
+                                                                   data-title="titulo"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="35%">password</td>
+                                            <td width="65%"><input name="pass" id="pass" value="{{ user.password }}"
+                                                                   placeholder="" data-type="text" data-pk="1"
+                                                                   data-title="titulo"></td>
+                                        </tr>
+
+
+                                        {#  <tr>
+                                              <td>¿ Cargar foto diferente...?
+                                                  SI desea cambiar la foto del post haga click en el boton boswer
+                                                  en la parte inferio seleccione una nueva imagen en el formato correspondiente </td>
+
+
+                                              <td> Imagen Actual del Post
+                                                  <li><img src="../uploads/{{ post.imagen }}" class="img-responsive"
+                                                           alt="Avatar"/></li>
+
+                                                  {{ form_widget(form.imagen,{'attr':{'class':'form-control, btn-lg btn-info'},'type':'file' }) }}
+
+                                              </td>
+
+                                          </tr>#}
+
+                                        {% if app.session.get('role')  == 'superadmin' %}
+                                            <tr>
+                                                <td>Permisos</td>
+
+                                                <td>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-10">
+                                                            <select name="role" id="role"
+                                                                    class="form-control selectpicker">
+                                                                <option value="admin">admin</option>
+                                                                <option value="superadmin">superadmin</option>
+                                                                <option value="inhabilitar">inhabilitar</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+
+
+                                            </tr>
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                    <button type="submit" class="btn btn-success btn-lg">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <!-- End of your awesome content -->
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End content here -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- End right content -->
+
+        </div>
+        <!-- End of page -->
+        <!-- the overlay modal element -->
+        <div class="md-overlay"></div>
+        <!-- End of eoverlay modal -->
+        <script>
+            var resizefunc = [];
+        </script>
+
+
+
+    {% endblock %}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+{% endblock %}

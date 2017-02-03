@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>
+        {% block title %}
+            Blog!
+        {% endblock %}
+
+    </title>
+    {% block stylesheets %}
+        {#<link rel="stylesheet" href="{{ asset ('bundles/framework/css/bootstrap.min.css') }} "/>#}
+       {# <link rel="stylesheet" href="{{ asset ('bundles/framework/css/dist/sweetalert.css') }} "/>#}
+        <link rel="stylesheet" href="{{ asset ('bundles/framework/css/style.css') }} "/>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+              integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+              crossorigin="anonymous">
+
+    {% endblock %}
+
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('b.ico') }}"/>
+
+
+</head>
+
+<body>
+{% block body %}
+
+    <body>
+    <!-- header-section-starts -->
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="{{ path('homepage') }}"><h1>Amplex Blog</h1></a>
+            </div>
+            <div class="pages">
+                <ul>
+                    <li><a class="active" href="{{ path('homepage') }}">Articulos</a></li>
+                    <li><a href="  {{ path('top') }} ">Top</a></li>
+                    <li><a href="404.html">Noticia</a></li>
+                </ul>
+            </div>
+            <div class="navigation">
+                <ul>
+                    <li><a class="" href="{{ path('acerca') }}">Acerca de nosotros</a></li>
+                    <li><a class="" href="{{ path('contactanos') }}">Contactanos</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="header-bottom">
+            <div class="type">
+                <h5>Categorias</h5>
+            </div>
+            <span class="menu"></span>
+            <div class="list-nav">
+                <ul>
+                    <li><a href="#">Equipos</a></li>|
+                    <li><a href="#">Tecnologia</a></li>|
+                    <li><a href="#">Ventas</a></li>|
+                    <li><a href="#">Mercadeo</a></li>|
+                    <li><a href="404.html"></a>outsorcing</li>|
+                    <li><a href="#">servicios</a></li>
+                </ul>
+            </div>
+            <!-- script for menu -->
+            <script>
+             //   $( "span.menu" ).click(function() {
+               //     $( ".list-nav" ).slideToggle( "slow", function() {
+                        // Animation complete.
+                 //   });
+               // });
+            </script>
+            <!-- script for menu -->
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    {% block container %}
+    <div class="container">
+        <div class="content">
+            <div class="col-md-7 content-left">
+                <h5 class="head">En noticias Recientes</h5>
+                {% for allpost in allpost %}
+                <div class="article">
+                    <h6>Software</h6>
+                    <a class="title" href="{{ path('printig', {'id': allpost.id}) }}"">{{ allpost.titulo }}</a>
+                    <a href="{{ path('printig', {'id': allpost.id}) }}"><img src="../uploads/{{ allpost.imagen }}" alt="" /></a>
+                    <p>{{ allpost.contenido|slice(0, 50) }}. </p>
+
+                </div>
+                {% endfor %}
+
+            </div>
+            <div class="col-md-5 content-right">
+                <div class="content-right-top">
+                    <h5 class="head">Popular</h5>
+                    {% for popular in popular %}
+                    <a href="{{ path('printig', {'id': popular.id}) }}">
+                        <div class="editor text-center">
+                            <h3>{{ popular.titulo  }}</h3>
+                            <p>{{ popular.contenido|slice(0, 20) }}.</p>
+                            <label></label>
+                            <span></span>
+                        </div>
+                    </a>
+                    {% endfor %}
+
+                </div>
+                <div class="editors-pic-grids">
+                    <h5>Seleccion de editores</h5>
+                    {% for editores in editores %}
+                    <div class="editors-pic">
+                        <div class="e-pic">
+                            <a href="{{ path('printig', {'id': editores.id}) }}"><img src="../uploads/{{ editores.imagen }}" alt="" /></a>
+                        </div>
+                        <div class="e-pic-info">
+                            <a href="{{ path('printig', {'id': editores.id}) }}">{{ editores.contenido|slice(0, 10) }}</a>
+                            <span></span>
+                            <label></label>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="features" style="background-image:url('../uploads/{{ feacture.imagen }}')">
+                <h5>Lo Mas Nuevo</h5>
+                <h2>{{ feacture.titulo|slice(0,25 ) }}</h2>
+            </div>
+            <div class="col-md-7 content-left">
+                <div class="article">
+                    <h5 class="head">En noticias recientes</h5>
+                    {% for reciente2 in reciente2 %}
+                        <div class="article">
+                            <h6>Software</h6>
+                            <a class="title" href="{{ path('printig', {'id': reciente2.id}) }}"">{{ reciente2.titulo }}</a>
+                            <a href="{{ path('printig', {'id': reciente2.id}) }}"><img src="../uploads/{{ reciente2.imagen }}" alt="" /></a>
+                            <p>{{ reciente2.contenido|slice(0, 50) }}. </p>
+
+                        </div>
+                    {% endfor %}                </div>
+            </div>
+            <div class="col-md-5 content-right content-right-top">
+                <h5 class="head">Popular</h5>
+                    {% for popular2 in popular2 %}
+                        <a href="{{ path('printig', {'id': popular2.id}) }}">
+                            <div class="editor text-center">
+                                <h3>{{ popular2.titulo  }}</h3>
+                                <p>{{ popular2.contenido|slice(0, 15) }}.</p>
+                                <label></label>
+                                <span></span>
+                            </div>
+                        </a>
+                    {% endfor %}
+
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block footer %}
+        <div class="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="col-md-3 footer-links">
+                        <h4>Other pages and things</h4>
+                        <a href="#">Design a creative Blog</a>
+                        <a href="#">Design a iPad Website</a>
+                        <a href="#">Single Page sales portfolio </a>
+                        <a href="#">Flat product website in Photoshop</a>
+                        <a href="#">Design a creative Blog</a>
+                        <a href="#">Design a iPad Website</a>
+                        <a href="#">Single Page sales portfolio </a>
+                        <a href="#">Flat product website</a>
+                    </div>
+                    <div class="col-md-3 footer-links span_66">
+                        <a href="#">Flat product website in Photoshop</a>
+                        <a href="#">Design a creative Blog</a>
+                        <a href="#">Design a iPad Website </a>
+                    </div>
+                    <div class="col-md-3 footer-links">
+                        <h4>Articulos Relevantes</h4>
+                        <a href="#">Design a creative Blog</a>
+                        <a href="#">Design a iPad Website</a>
+                        <a href="#">Single Page sales portfolio </a>
+                        <a href="#">Flat product website</a>
+                        <a href="#">Design a creative Blog</a>
+                    </div>
+                    <div class="col-md-3 footer-links">
+                        <h4>Otra Paginas  y  Cosas</h4>
+                        <a href="#">Blaz Robar</a>
+                        <a href="#">Nick Toranto</a>
+                        <a href="#">Joisp Kelava</a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="copyrights">
+                        <p>AMplex © 2016 All rights reserved | Tema por  <a href="#">  Carlos Sosa</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+{% endblock %}
+
+
+{% endblock %}
+
+
+</html>
+{% block javascripts %}
+
+    <script src="{{ asset('bundles/framework/js/jquery-3.1.1.min.js') }}"></script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    {#<script src="{{ asset('bundles/framework/js/bootstrap.min.js') }}"></script>#}
+    {#<script src="{{ asset('bundles/framework/js/bootstrap.js') }}"></script>#}
+    <script src="{{ asset('bundles/framework/css/dist/sweetalert.min.js') }}"></script>
+
+{% endblock %}

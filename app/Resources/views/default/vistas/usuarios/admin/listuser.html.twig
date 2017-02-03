@@ -1,0 +1,190 @@
+{% extends '::newadmin.html.twig' %}
+{% block title %}Lista Genaral de Admin{% endblock %}
+{% block class 'fixed-left login-page' %}
+{% block body %}
+    {{ parent() }}
+    {% block content %}
+
+        <!-- Start right content -->
+        <div class="content-page">
+            <!-- ============================================================== -->
+            <!-- Start Content here -->
+            <!-- ============================================================== -->
+            <div class="content">
+                <!-- Page Heading Start -->
+                <div class="page-heading">
+                    <h1><i class='fa fa-envelope'></i>Lista Genaral de Admins</h1>
+                </div>
+
+                {{ include('default/vistas/message/success.html.twig') }}
+                {{ include('default/vistas/message/error.html.twig') }}
+                <div class="table-responsive">
+                    Total Records: <span id="total"> {{ pagination.getTotalItemCount }}</span>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                {{ knp_pagination_sortable(pagination,'ID','u.id') }}
+                            </th>
+                            <th>
+                                {{ knp_pagination_sortable(pagination,'ID de usuario','u.userid') }}
+                            </th>
+                            <th>
+                                {{ knp_pagination_sortable(pagination,'Nombre','u.username') }}
+                            </th>
+                            <th>
+                                {{ knp_pagination_sortable(pagination,'Correo','u.email') }}
+                            </th>
+                            <th>
+                                {{ knp_pagination_sortable(pagination,'contraseña','u.password') }}
+                            </th>
+                            <th>
+                                {{ knp_pagination_sortable(pagination,'Fecha de Registro','u.redDate') }}
+                            </th>
+                            <th>
+                                {{ knp_pagination_sortable(pagination,'Role','u.role') }}
+                            </th>
+
+                        </tr>
+                        </thead>
+                        {% for pagination in pagination %}
+                        <tbody>
+                        <tr id="{{ pagination.id }}" data-id="{{ pagination.id }}" class="getId">
+                            <td > {{ pagination.id }}</td>
+                            <td> {{ pagination.userid}}</td>
+                            <td> {{ pagination.username }}</td>
+                            <td> {{ pagination.redDate|date('Y-m-d H:i') }}</td>
+                            <td> {{ pagination.password }}</td>
+                            <td> {{ pagination.email }}</td>
+                            <td> {{ pagination.role }}</td>
+
+
+                            <td>  <a href="{{ path('verpostuser',{id: pagination.id }) }}" class="btn btn-info btn btn-sm"> Ver sus Post</a>
+                                <a href="{{ path('edituser',{id: pagination.id }) }}" type="button" class="btn btn-primary btn-sm">Editar</a>
+                                {#<a href="#" class="btn btn-danger btn btn-sm btn-delete">Borrar</a></td>#}
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                    {# display navigation #}
+                    <div class="pagination">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+        </div>
+
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End content here -->
+        <!-- ============================================================== -->
+
+        </div>
+        <!-- End right content -->
+
+
+        <!--
+             MODAL OVERLAY
+             Always place this div at the end of the page content
+             -->
+        <div class="md-overlay"></div>
+        </div>
+        <!-- End of page -->
+        <!-- the overlay modal element -->
+        <div class="md-overlay"></div>
+        <!-- End of eoverlay modal -->
+        <script>
+            var resizefunc = [];
+        </script>
+    {% endblock %}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready( function () {
+
+            var url='http://127.0.0.1:8000/';
+            var message='esta seguro que desea borrar este post(Al eliminar el Post recuerde que Estara Eliminando Tambien Todos los Comentarios Relacionados a el )';
+
+
+            $('.btn-delete').click(function (e) {
+                e.preventDefault();
+                var row= $(this).parents('tr');
+                var id = $(row).attr("id");
+
+                bootbox.confirm({
+                    message: message,
+                    buttons: {
+                        confirm: {
+                            label: 'Si',
+                            className: 'btn-success btn btn-lg',
+
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-danger btn btn-lg'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result==true){
+                            $.ajax({
+                                type:'POST',
+                                dataType:'json',
+                                url:url+'deleteuser/'+id,
+                                success:function (response) {
+
+                                    if(response.removed == 1){
+                                        row.fadeOut();
+                                        $('#message').removeClass('hidden');
+                                        $('#user-message').text(response.message);
+
+                                        var totalpost= $('#total').text();
+                                        if($.isNumeric(totalpost)){
+                                            $('#total').text(totalpost - 1);
+                                        }else{
+                                            $('#total').text(response.allpost);
+                                        }
+
+                                    }else {
+                                        $('#message-danger').removeClass('hidden');
+                                        $('#user-message-danger').text(response.message);
+                                    }
+
+                                }
+
+
+                            });
+
+
+                        }
+                    }
+                });
+
+            });
+
+
+        });
+
+
+
+
+
+    </script>
+
+
+
+
+{% endblock %}

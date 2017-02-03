@@ -1,0 +1,262 @@
+{% extends 'adminbase.html.twig' %}
+
+
+{% block body %}
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('index') }}">AmplexBlog! Admin</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b
+                                class="caret"></b></a>
+                    <ul class="dropdown-menu message-dropdown">
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM
+                                        </p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="message-footer">
+                            <a href="#">Read All New Messages</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b
+                                class="caret"></b></a>
+                    <ul class="dropdown-menu alert-dropdown">
+                        <li>
+                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">View All</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                class="fa fa-user"></i> {{ app.session.get('nombre') }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Perfil {{ app.session.get('id') }}</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i>correo</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Opciones</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{{ path('logaout') }}"><i class="fa fa-fw fa-power-off"></i> Salir</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="{{ path('index') }}"><i class="fa fa-fw fa-dashboard"></i> Portada</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('todopost') }}"><i class="fa fa-fw fa-bar-chart-o"></i>Top post</a>
+                    </li>
+                    <li class="active">
+                        <a href="{{ path('listpost') }}"><i class="fa fa-fw fa-table"></i> Listas de post</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('newpost') }}"><i class="fa fa-fw fa-edit"></i> Crear post</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i
+                                    class="fa fa-fw fa-arrows-v"></i> Dropdown <i
+                                    class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="#">Crear categorias</a>
+                            </li>
+                            <li>
+                                <a href="#"></a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                           Post Realizados
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li>
+                                <i class="fa fa-dashboard"></i> <a href="{{ path('index') }}">Portada</a>
+                            </li>
+                            <li class="active">
+                                <i class="fa fa-edit"></i> Tus post
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <i class="fa fa-info-circle"></i> <strong>Bienvenido</strong> <a href="#"
+                                                                                             class="alert-link">{{ app.session.get('nombre') }} </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+            {% for listpost in listpost %}
+
+            {{ include('default/vistas/message/success.html.twig') }}
+            {{ include('default/vistas/message/error.html.twig') }}
+                <tr id="{{ listpost.id  }}" data-id="{{ listpost.id  }}" class="getId">
+                        <div id="{{ listpost.id  }}" class="columns">
+
+                    <ul class="price">
+                        <li class="header">{{ listpost.titulo }}</li>
+                        <li><img src="uploads/{{ listpost.imagen }}" class="img-responsive img-circle" alt="Foto"/></li>
+                        <li class="grey"> {{ listpost.fechaPublicacion |date('Y-m-d H:i:s')}} </li>
+                        <li>{{ listpost.contenido }}</li>
+                        <li>10 Emails</li>
+                    </ul>
+
+                    <div class="row grey" style="padding: 25px; margin: auto;">
+                        <form action="{{path('ver',{ id : listpost.id })}}"method="post" role="form">
+                            <div  class="col-md-4">
+                            <main class="mdl-layout__content">
+                                <button  class="mdl-button mdl-button--raised">ver</button>
+                        </div></form>
+
+                        <form action="{{path('editar',{ id : listpost.id })}}"method="post" role="form">
+                            <div  class="col-md-4">
+                            <button href="{{ path('newedit',{id: post.id }) }}"  class="mdl-button mdl-button--raised mdl-button--colored">editar</button>
+                        </div></form>
+
+                        <div class="col-md-4">
+                            <button  id="{{ listpost.id }}" class="mdl-button mdl-button--raised mdl-button--accent btn btn-delete">elimiar</button>
+                        </div> </div> </tr>
+                    </div>
+                </div>
+            {% endfor %}
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent () }}
+    <script>
+        $(document).ready(function () {
+
+            $('.btn-delete').click(function (e) {
+                e.preventDefault();
+                var row=$(this).parents('div');
+                console.log(row);exit();
+            var id=(this.id);
+
+
+
+                bootbox.confirm({
+                message:'esta seguro que desea borrar este post(Al eliminar el Post recuerde que Estara Eliminando Tambien Todos los Comentarios Relacionados a el )',
+                buttons: {
+                    confirm: {
+                        label: 'Si',
+                        className: 'btn-success btn btn-lg',
+
+                    },
+                    cancel: {
+                        label: 'No',
+                        className: 'btn-danger btn btn-lg'
+                    }
+                },
+                callback: function (result) {
+
+                    if (result == true) {
+
+                          $.ajax({
+                            type:'POST',
+                          dataType:'json',
+                        url:'http://127.0.0.1:8000/prueba/'+id,
+                              success: function(response){
+                                  if(response.removed == 1){
+                                      row.fadeOut();
+                                      $('#message').removeClass('hidden');
+                                      $('#user-message').text(response.message);
+
+
+                                  }else {
+                                      $('#message-danger').removeClass('hidden');
+                                      $('#user-message-danger').text(response.message);
+                                  }
+                              }
+                          });
+                    }
+                }
+            });
+            })
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,197 @@
+{% extends '::newadmin.html.twig' %}
+{% block title %}Post{% endblock %}
+{% block class 'fixed-left login-page' %}
+{% block body %}
+    {{ parent() }}
+    {% block content %}
+        <style>
+
+            body
+            {
+                padding-top: 20px;
+                background-color: #F7F7F7;
+            }
+            .post
+            {
+                background-color: #FFF;
+                overflow: hidden;
+                box-shadow: 0 0 1px #CCC;
+            }
+            .post img
+            {
+                filter: blur(2px);
+                -webkit-filter: blur(2px);
+                -moz-filter: blur(2px);
+                -o-filter: blur(2px);
+                -ms-filter: blur(2px);
+            }
+            .post .content
+            {
+                padding: 15px;
+            }
+            .post .author
+            {
+                font-size: 11px;
+                color: #737373;
+                padding: 25px 30px 20px;
+            }
+            .post .post-img-content
+            {
+                height: 196px;
+                position: relative;
+            }
+            .post .post-img-content img
+            {
+                position: absolute;
+            }
+            .post .post-title
+            {
+                display: table-cell;
+                vertical-align: bottom;
+                z-index: 2;
+                position: relative;
+            }
+            .post .post-title b
+            {
+                background-color: rgba(51, 51, 51, 0.58);
+                display: inline-block;
+                margin-bottom: 5px;
+                color: #FFF;
+                padding: 10px 15px;
+                margin-top: 5px;
+            }
+
+        </style>
+
+        <div class="content-page">
+            <!-- ============================================================== -->
+            <!-- Start Content here -->
+            <!-- ============================================================== -->
+            <div class="content">
+                <!-- Page Heading Start -->
+                <div class="page-heading">
+                    <h1><i class='fa fa-magic'></i> Post Publicado Por: {{ user.username }}</h1>
+                    <h3>Estos son todos tus Post Publicados</h3> </div>
+                <!-- Page Heading End-->
+                <div class="row">
+                    {% for listpost in listpost %}
+
+                        {{ include('default/vistas/message/success.html.twig') }}
+                        {{ include('default/vistas/message/error.html.twig') }}
+                        <div class="col-sm-4 col-md-4" style=" bottom: 10px;">
+                            <div id="{{ listpost.id  }}" class="post">
+                                <div class="post-img-content">
+                                    <img src="uploads/{{ listpost.imagen }}" class="img-responsive" />
+                                    <span class="post-title"><b>{{ listpost.titulo }}</b><br />
+                        <b>CSS3 Blur</b></span>
+                                </div>
+                                <div class="content">
+                                    <div class="author">
+                                        Por <b>{{ user.username }}</b> |
+                                        <time datetime="{{ listpost.fechaPublicacion |date('Y-m-d H:i:s')}} ">{{ listpost.fechaPublicacion |date('Y-m-d H:i:s')}} </time>
+                                    </div>
+                                    <div>
+                                        {{ listpost.contenido }}
+                                    </div>
+                                    <div>
+                                        <form action="{{path('ver',{ id : listpost.id })}}"method="post" role="form">
+                                            <div  class="col-md-4">
+                                                <main class="mdl-layout__content">
+                                                    <button  class="mdl-button mdl-button--raised">ver</button>
+                                            </div></form>
+
+                                        <form action="{{path('newedit',{ id : listpost.id })}}"method="post" role="form">
+                                            <div  class="col-md-4">
+                                                <button href="{{ path('newedit',{ id : listpost.id })}}"  class="mdl-button mdl-button--raised mdl-button--colored">editar</button>
+                                            </div></form>
+
+                                        <div class="col-md-4">
+                                            <button  id="{{ listpost.id }}" class="mdl-button mdl-button--raised mdl-button--accent btn btn-delete">elimiar</button>
+                                        </div>  </tr>
+                                        {#  <a href="http://www.jquery2dotnet.com/2014/01/jquery-highlight-table-row-and-column.html" class="btn btn-default btn-md">Ver</a>
+                                          <a href="http://www.jquery2dotnet.com/2014/01/jquery-highlight-table-row-and-column.html" class="btn btn-info btn-md">Editar</a>
+                                          <a href="http://www.jquery2dotnet.com/2014/01/jquery-highlight-table-row-and-column.html" class="btn btn-danger btn-md">Eliminar</a>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End content here -->
+        <!-- ============================================================== -->
+
+        </div>
+        <!-- End right content -->
+
+        </div>
+        <!-- End of page -->
+        <!-- the overlay modal element -->
+        <div class="md-overlay"></div>
+        <!-- End of eoverlay modal -->
+        <script>
+            var resizefunc = [];
+        </script>
+
+    {% endblock %}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('.btn-delete').click(function (e) {
+                e.preventDefault();
+                var row=$(this).parents('tr');
+                var id=(this.id);
+
+                var url = 'http://127.0.0.1:8000/';
+                bootbox.confirm({
+                    message: 'esta seguro que desea borrar este post(Al eliminar el Post recuerde que Estara Eliminando Tambien Todos los Comentarios Relacionados a el )',
+                    buttons: {
+                        confirm: {
+                            label: 'Si',
+                            className: 'btn-success btn btn-lg',
+
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-danger btn btn-lg'
+                        }
+                    },
+                    callback: function (result) {
+
+                        if (result == true) {
+
+                            $.ajax({
+                                type:'POST',
+                                dataType:'json',
+                                url: url + 'prueba/' + id,
+                                success: function(response){
+                                    if(response.removed == 1){
+                                        row.fadeOut();
+                                        $('#message').removeClass('hidden');
+                                        $('#user-message').text(response.message);
+
+
+                                    }else {
+                                        $('#message-danger').removeClass('hidden');
+                                        $('#user-message-danger').text(response.message);
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            })
+        });
+    </script>
+
+
+
+{% endblock %}

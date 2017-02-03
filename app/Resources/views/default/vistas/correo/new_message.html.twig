@@ -1,0 +1,178 @@
+{% extends '::newadmin.html.twig' %}
+{% block title %}Ver email{% endblock %}
+{% block class 'fixed-left login-page' %}
+{% block body %}
+    {{ parent() }}
+    {% block content %}
+
+        <!-- Right Sidebar End -->
+        <!-- Start right content -->
+        <div class="content-page">
+            <!-- ============================================================== -->
+            <!-- Start Content here -->
+            <!-- ============================================================== -->
+            <div class="content">
+                <!-- Page Heading Start -->
+                <div class="page-heading">
+                    <h1><i class='fa fa-envelope'></i> E-mail</h1>
+                </div>
+                <!-- Page Heading End-->
+                <!-- Your awesome content goes here -->
+                <div class="box-info box-messages animated fadeInDown">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <!-- Sidebar Message -->
+
+                            <div class="btn-group new-message-btns stacked">
+                                <a href="{{ path('veremail') }}" class="btn btn-primary btn-lg btn-block text-left"><i
+                                            class="icon-left-open-1"></i> Regresar a Inbox</a>
+                            </div>
+                            <div class="list-group menu-message">
+                                <a href="{{ path('veremail') }}" class="list-group-item"><i class="icon-inbox"></i> Inbox <span
+                                            class="badge pull-right"></span></a>
+                                <a href="{{ path('versend') }}" class="list-group-item"><i class="icon-export"></i> Enviados</a>
+                            </div>
+
+                        </div><!-- ENd div .col-md-2 -->
+                        {% for flashMessage in app.session.flashbag.get('notice') %}
+                            <div class="flash-notice alert alert-success alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <strong>{{ flashMessage }}</strong>
+                            </div>
+                        {% endfor %}
+
+                        <div class="col-md-9">
+                            <div class="widget">
+                                <div class="widget-content padding">
+                                    <form role="form" class="form-horizontal " action="{{ path('newemail') }}" method="post" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-1 col-xs-1">Para:</label>
+                                            <div class="col-sm-10 col-xs-8">
+                                                <input required type="email" name="email" id="parametro" value="" class="form-control input-invis"
+                                                       placeholder="someone@company.com">
+                                                <div id="resultado" style="border: solid black 1px;"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-1">Asunto:</label>
+                                            <div class="col-sm-11">
+                                                <input required type="text" name="asunto" id="asunto" class="form-control input-invis">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <textarea  name="texto" id="texto" class="summernote-small form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-8">
+                                                <button type="submit" class="btn btn-success"><i
+                                                            class="icon-paper-plane-1"></i> Enviar
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <p class="quick-post message">
+                                                    <input type="file" name="imagen" id="imagen" title="Selecione imagen" data-toggle="tooltip"><i
+                                                                class="fa fa-picture-o"></i></input>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of your awesome content -->
+
+
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End content here -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- End right content -->
+
+        <!-- Modal New message -->
+        <div class="md-modal md-slide-stick-top" id="new-message">
+            <div class="md-content">
+                <div class="md-close-btn"><a class="md-close"><i class="fa fa-times"></i></a></div>
+                <h3><strong>Nuevo</strong>Mensaje</h3>
+                <div>
+                    <form role="form" class="form-horizontal " action="{{ path('newemail') }}" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="email"  id="parametro" required name="email"  class="form-control input-lg" placeholder="Mensaje para">
+                        </div>
+                        <div class="form-group">
+                            <input type="text"  name="asunto" id="asunto" class="form-control input-lg" placeholder=" Mensaje Asunto">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="texto"  class="summernote-small form-control"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <button type="submit" class="btn btn-success btn-sm">Enviar</button>
+                            </div>
+                            <div class="col-xs-4">
+                                <p class="quick-post message">
+
+                                    <input type="file" name="imagen" id="imagen"><i class="fa fa-video-camera"></i></input>
+                                    <input type="file" name="archivo" id="archivo"><i class="icon-attach-3" data-toggle="tooltip"></i></input>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--
+        MODAL OVERLAY
+        Always place this div at the end of the page content
+        -->
+        <!-- Modal New message -->
+
+
+
+        <div class="md-overlay"></div>
+        </div>
+        <!-- End of page -->
+        <!-- the overlay modal element -->
+        <div class="md-overlay"></div>
+        <!-- End of eoverlay modal -->
+    {% endblock %}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+
+
+    <script>
+        $(document).ready(function() {
+            var url = 'http://127.0.0.1:8000/';
+           $('#parametro').keypress(function () {
+
+               var param = $("#parametro").val();
+               $.ajax({
+                   type: 'POST',
+                   dataType: 'json',
+                   url: url + 'busqueda/'+param,
+                   data:{param1:param,param2:param2},
+                   success: function (response) {
+
+                       data = JSON.parse(response.user);
+                       $('#resultado').val(data.userid);
+
+                     //  $('#resultado').text(nombre);
+
+                       //window.location.replace(url + 'leermail/' + id);
+
+
+                   }
+               });
+           });
+        });
+
+    </script>
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends '::newadmin.html.twig' %}
+{% block title %}Editar Post{% endblock %}
+{% block class 'fixed-left login-page' %}
+{% block body %}
+    {{ parent() }}
+    {% block content %}
+
+        <div class="content-page">
+            <!-- ============================================================== -->
+            <!-- Start Content here -->
+            <!-- ============================================================== -->
+            <div class="content">
+                <!-- Page Heading Start -->
+                <div class="page-heading">
+                    <h1><i class='fa fa-check'></i> Editar Post</h1>
+                </div>
+                <!-- Page Heading End-->
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="flash-notice alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <strong>{{ flashMessage }}</strong>
+                    </div>
+                {% endfor %}
+                <!-- Your awesome content goes here -->
+                <!-- /.row -->
+                <form action="{{ path('update',{id: post.id }) }}" method="post" class="form-horizontal" role="form"
+                      novalidate="novalidate" enctype="multipart/form-data">
+                    {{ form_start(form,{'attr':{'novalidate':'novalidate','role':'form','class':'form-horizontal'}}) }}
+                    <div class="row">
+                        <div class="col-sm-12 portlets">
+
+                            <div class="widget">
+                                <div class="widget-header">
+                                    <h2><strong>Datos del </strong> Post</h2>
+                                    <div class="additional-btn">
+                                        <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                                        <a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+                                        <a href="#" class="widget-close"><i class="icon-cancel-3"></i></a>
+                                    </div>
+                                </div>
+                                <div class="widget-content padding">
+                                    <p>Haz click Para Editar los Campos</p>
+                                    <table id="user" class="table table-bordered table-striped" style="clear: both">
+                                        <tbody>
+                                        <tr>
+                                            <td width="35%">Titulo del Post</td>
+                                            <td width="65%">
+
+                                                {{ form_widget(form.titulo,{'attr':{'class':'form-control','placeholder':'Titulo de la publicacion'}}) }}
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>Contenido del post <i> (para guardar los cambios presione
+                                                    ctrl+enter)</i></td>
+                                            <td>
+                                                <div class="widget">
+                                                    <div class="widget-header">
+                                                        <h2><strong> Editor</strong> de Contenido</h2>
+                                                        <div class="additional-btn">
+                                                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                                                            <a href="#" class="widget-toggle"><i
+                                                                        class="icon-down-open-2"></i></a>
+                                                            <a href="#" class="widget-close"><i
+                                                                        class="icon-cancel-3"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="widget-content">
+
+                                                        {{ form_widget(form.contenido,{'attr':{'class':'form-control','id':'ckeditor','placeholder':'contenido'}}) }}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {{ form_widget(form._token,{'attr':{'class':'form-control'} ,'type':'hidden' }) }}
+
+                                        <tr>
+                                            <td>¿ Cargar foto diferente...?
+                                                SI desea cambiar la foto del post haga click en el boton boswer
+                                                en la parte inferio seleccione una nueva imagen en el formato
+                                                correspondiente
+                                            </td>
+
+
+                                            <td> Imagen Actual del Post
+                                                <li><img src="../uploads/{{ post.imagen }}" class="img-responsive"
+                                                         alt="Avatar"/></li>
+                                                <input type="text" class="hidden" id="foto" name="foto"
+                                                       value="{{ post.imagen }}">
+                                                {{ form_widget(form.imagen,{'attr':{'class':'form-control'},'type':'file' }) }}
+
+
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Seccion del Post ( Lugar donde se posiciona el post en el Blog
+
+                                                la seccion del post que esta editando actualmente paracera en un
+                                                caracter numerico
+
+                                                <p><strong>1 para Noticia recientes</strong></p>
+                                                <p><strong>2 para Populares</strong></p>
+                                                <p><strong>3 para Seleccion de Editores</strong></p>
+                                                <p><strong> 4 para FEATURED NEWS</strong></p>)
+                                            </td>
+
+                                            <td>
+                                                <select class="form-control" name="seccion" id="seccion">
+                                                    <option class="autofocus" value=" {{ post.seccion }}">{{ post.seccion }} </option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                            </td>
+
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    {{ form_widget(form.save,{'label':'Guardar','attr':{'class':'btn btn-success'}}) }}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <!-- End of your awesome content -->
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End content here -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- End right content -->
+
+        </div>
+        <!-- End of page -->
+        <!-- the overlay modal element -->
+        <div class="md-overlay"></div>
+        <!-- End of eoverlay modal -->
+        <script>
+            var resizefunc = [];
+        </script>
+    {% endblock %}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+
+
+
+{% endblock %}

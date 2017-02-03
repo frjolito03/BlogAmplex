@@ -1,0 +1,37 @@
+{{ form_start(form,{'attr':{'id':id|default('form')}}) }}
+
+{{ form_widget(form) }}
+
+{% if with_submit is not defined or with_submit == true %}
+
+<input type="button" class="btn btn-danger btn btn-lg mdl-button mdl-button--raised mdl-button--accent btn btn-delete" value="delete" onclick="confirmDelete()">
+{% endif %}
+{{ form_end(form) }}
+
+
+<script>
+    var message = '{{ message }}';
+    function confirmDelete() {
+        bootbox.confirm({
+            message: message,
+            buttons: {
+                confirm: {
+                    label: 'Si',
+                    className: 'btn-success btn btn-lg',
+
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger btn btn-lg'
+                }
+            },
+            callback: function (result) {
+                if (result==true){
+                    document.form.submit();
+                }
+            }
+        });
+
+
+    }
+</script>

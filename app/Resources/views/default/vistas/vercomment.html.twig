@@ -1,0 +1,333 @@
+{% extends '::newadmin.html.twig' %}
+{% block title %}Ver Comentarios{% endblock %}
+{% block class 'fixed-left login-page' %}
+{% block body %}
+    {{ parent() }}
+    {% block content %}
+
+        <div class="content-page">
+            <!-- ============================================================== -->
+            <!-- Start Content here -->
+            <!-- ============================================================== -->
+
+            <div class="profile-banner" style="background-image: url(update/stock/1epgUO0.jpg); ">
+                <img src="../uploads/{{ post.imagen }}" class="profile-banner" alt="User avatar">
+                <div class="col-sm-12 profile-actions text-right">
+                    <a href="{{ path('newedit',{id: post.id }) }}" type="button" class="btn btn-primary btn-sm fa fa-pencil">Editar</a>
+                </div>
+            </div>
+
+            <div class="content">
+
+                <div class="row">
+                    <div class="col-sm-3">
+                        <!-- Begin user profile -->
+                        <div class="text-center user-profile-2">
+                            <h4>Howdy, <b></b></h4>
+
+                            <h5>Administrador </h5>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="badge">1,245</span>
+                                    Seguidores
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">245</span>
+                                    seguidores
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="badge">1,245</span>
+                                    Tweets
+                                </li>
+                            </ul>
+
+                            <!-- User button -->
+                            <div class="user-button">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <button type="button" class="btn btn-primary btn-sm btn-block"><i
+                                                    class="fa fa-envelope"></i> Enviar Mensaje
+                                        </button>
+                                    </div>
+                                </div>
+                            </div><!-- End div .user-button -->
+                        </div><!-- End div .box-info -->
+                        <!-- Begin user profile -->
+                    </div><!-- End div .col-sm-4 -->
+
+                    <div class="col-sm-9">
+                        <div class="widget widget-tabbed">
+                            <!-- Nav tab -->
+                            <ul class="nav nav-tabs nav-justified">
+                                <li class="active"><a href="#my-timeline" data-toggle="tab"><i class="fa fa-pencil"></i>
+                                        Timeline</a></li>
+                              {# <li><a href="#user-activities" data-toggle="tab"><i class="fa fa-laptop"></i>
+                                        Activitidades</a></li>
+                                <li><a href="#mymessage" data-toggle="tab"><i class="fa fa-envelope"></i> Enviar Mensaje</a>
+                                </li>#}
+                            </ul>
+                            <!-- End nav tab -->
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+
+                                <!-- Tab timeline -->
+                                <div class="tab-pane animated active fadeInRight" id="my-timeline">
+                                    <div class="user-profile-content">
+
+                                        <!-- Begin timeline -->
+                                        <div class="the-timeline">
+                                            <form role="form" action="{{ path('vercomment',{id: comentario2.id }) }}" class="post-to-timeline">
+                                                <textarea class="form-control" style="height: 70px;"
+                                                          placeholder="Que tienes en mente.....?"></textarea>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <a class="btn btn-sm btn-default"><i
+                                                                    class="fa fa-camera"></i></a>
+                                                        <a class="btn btn-sm btn-default"><i
+                                                                    class="fa fa-video-camera"></i></a>
+                                                        <a class="btn btn-sm btn-default"><i
+                                                                    class="fa fa-map-marker"></i></a>
+                                                    </div>
+                                                    <div class="col-sm-6 text-right">
+                                                        <button type="submit" class="btn btn-primary">Post</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <br><br>
+                                            <ul>
+
+                                                {% for comentario in comentario %}
+                                                <li>
+                                                    <div class="the-date">
+                                                        <span>{{ comentario.date|date('d') }}</span>
+                                                        <small>{{ comentario.date|date("F jS ") }}</small>
+                                                    </div>
+                                                    <h4>Lorem ipsum dolor!</h4>
+                                                    <p>
+                                                        {{ comentario.comment}}
+                                                    </p>
+                                                </li>
+                                                {% endfor %}
+
+                                            </ul>
+                                        </div><!-- End div .the-timeline -->
+                                        <!-- End timeline -->
+                                    </div><!-- End div .user-profile-content -->
+                                </div><!-- End div .tab-pane -->
+                                <!-- End Tab timeline -->
+
+                                <!-- Tab about -->
+
+                                <!-- End Tab about -->
+
+
+                                <!-- Tab user activities -->
+                                {# <div class="tab-pane animated fadeInRight" id="user-activities">
+                                      <div class="scroll-user-widget">
+                                          <ul class="media-list">
+                                              <li class="media">
+                                                  <a href="#fakelink">
+                                                      <p><strong>John Doe</strong> Uploaded a photo <strong>&#34;DSC000254.jpg&#34;</strong>
+                                                          <br /><i>2 minutes ago</i></p>
+                                                  </a>
+                                              </li>
+                                              <li class="media">
+                                                  <a href="#fakelink">
+                                                      <p><strong>John Doe</strong> Created an photo album  <strong>&#34;Indonesia Tourism&#34;</strong>
+                                                          <br /><i>8 minutes ago</i></p>
+                                                  </a>
+                                              </li>
+                                              <li class="media">
+                                                  <a href="#fakelink">
+                                                      <p><strong>Annisa</strong> Posted an article  <strong>&#34;Yogyakarta never ending Asia&#34;</strong>
+                                                          <br /><i>an hour ago</i></p>
+                                                  </a>
+                                              </li>
+                                              <li class="media">
+                                                  <a href="#fakelink">
+                                                      <p><strong>Ari Rusmanto</strong> Added 3 products
+                                                          <br /><i>3 hours ago</i></p>
+                                                  </a>
+                                              </li>
+                                              <li class="media">
+                                                  <a href="#fakelink">
+                                                      <p><strong>Hana Sartika</strong> Send you a message  <strong>&#34;Lorem ipsum dolor...&#34;</strong>
+                                                          <br /><i>12 hours ago</i></p>
+                                                  </a>
+                                              </li>
+                                              <li class="media">
+                                                  <a href="#fakelink">
+                                                      <p><strong>Johnny Depp</strong> Updated his avatar
+                                                          <br /><i>Yesterday</i></p>
+                                                  </a>
+                                              </li>
+                                              <li class="media">
+                                                  <a href="#fakelink">
+                                                      <p><strong>John Doe</strong> Uploaded a photo <strong>&#34;DSC000254.jpg&#34;</strong>
+                                                          <br /><i>2 minutes ago</i></p>
+                                                  </a>
+                                              </li>
+                                              <li class="media">
+                                                  <a href="#fakelink">
+                                                      <p><strong>John Doe</strong> Created an photo album  <strong>&#34;Indonesia Tourism&#34;</strong>
+                                                          <br /><i>8 minutes ago</i></p>
+                                                  </a>
+                                              </li>
+                                              <li class="media">
+                                                  <a href="#fakelink">
+                                                      <p><strong>Annisa</strong> Posted an article  <strong>&#34;Yogyakarta never ending Asia&#34;</strong>
+                                                          <br /><i>an hour ago</i></p>
+                                                  </a>
+                                              </li>
+                                              <li class="media">
+                                                  <a href="#fakelink">
+                                                      <p><strong>Ari Rusmanto</strong> Added 3 products
+                                                          <br /><i>3 hours ago</i></p>
+                                                  </a>
+                                              </li>
+                                              <li class="media">
+                                                  <a href="#fakelink">
+                                                      <p><strong>Hana Sartika</strong> Send you a message  <strong>&#34;Lorem ipsum dolor...&#34;</strong>
+                                                          <br /><i>12 hours ago</i></p>
+                                                  </a>
+                                              </li>
+                                              <li class="media">
+                                                  <a href="#fakelink">
+                                                      <p><strong>Johnny Depp</strong> Updated his avatar
+                                                          <br /><i>Yesterday</i></p>
+                                                  </a>
+                                              </li>
+                                          </ul>
+                                      </div><!-- End div .scroll-user-widget -->
+                                  </div><!-- End div .tab-pane -->#}
+                                <!-- End Tab user activities -->
+
+                                <!-- Tab user messages -->
+                                {# <div class="tab-pane animated fadeInRight" id="mymessage">
+                                    <div class="scroll-user-widget">
+                                        <ul class="media-list">
+                                            <li class="media">
+                                                <a class="pull-left" href="#fakelink">
+                                                    <img class="media-object" src="assets/img/avatar/2.jpg" alt="Avatar">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="#fakelink">John Doe</a> <small>Just now</small></h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <a class="pull-left" href="#fakelink">
+                                                    <img class="media-object" src="assets/img/avatar/1.jpg" alt="Avatar">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="#fakelink">Annisa</a> <small>Yesterday at 04:00 AM</small></h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus</p>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <a class="pull-left" href="#fakelink">
+                                                    <img class="media-object" src="assets/img/avatar/5.jpg" alt="Avatar">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="#fakelink">Rusmanovski</a> <small>January 17, 2014 05:35 PM</small></h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <a class="pull-left" href="#fakelink">
+                                                    <img class="media-object" src="assets/img/avatar/4.jpg" alt="Avatar">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="#fakelink">Ari Rusmanto</a> <small>January 17, 2014 05:35 PM</small></h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <a class="pull-left" href="#fakelink">
+                                                    <img class="media-object" src="assets/img/avatar/3.jpg" alt="Avatar">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="#fakelink">Jenny Doe</a> <small>January 17, 2014 05:35 PM</small></h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <a class="pull-left" href="#fakelink">
+                                                    <img class="media-object" src="assets/img/avatar/2.jpg" alt="Avatar">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="#fakelink">John Doe</a> <small>Just now</small></h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <a class="pull-left" href="#fakelink">
+                                                    <img class="media-object" src="assets/img/avatar/1.jpg" alt="Avatar">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="#fakelink">Annisa</a> <small>Yesterday at 04:00 AM</small></h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus</p>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <a class="pull-left" href="#fakelink">
+                                                    <img class="media-object" src="assets/img/avatar/5.jpg" alt="Avatar">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="#fakelink">Rusmanovski</a> <small>January 17, 2014 05:35 PM</small></h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <a class="pull-left" href="#fakelink">
+                                                    <img class="media-object" src="assets/img/avatar/4.jpg" alt="Avatar">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="#fakelink">Ari Rusmanto</a> <small>January 17, 2014 05:35 PM</small></h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <a class="pull-left" href="#fakelink">
+                                                    <img class="media-object" src="assets/img/avatar/3.jpg" alt="Avatar">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading"><a href="#fakelink">Jenny Doe</a> <small>January 17, 2014 05:35 PM</small></h4>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div><!-- End div .scroll-user-widget -->
+                                </div><!-- End div .tab-pane -->#}
+                                <!-- End Tab user messages -->
+                            </div><!-- End div .tab-content -->
+                        </div><!-- End div .box-info -->
+                    </div>
+                </div>
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End content here -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- End right content -->
+
+        </div>
+        <!-- End of page -->
+        <!-- the overlay modal element -->
+        <div class="md-overlay"></div>
+        <!-- End of eoverlay modal -->
+        <script>
+            var resizefunc = [];
+        </script>
+
+
+    {% endblock %}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+
+{% endblock %}

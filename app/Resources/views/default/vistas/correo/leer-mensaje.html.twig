@@ -1,0 +1,160 @@
+{% extends '::newadmin.html.twig' %}
+{% block title %}Ver email{% endblock %}
+{% block class 'fixed-left login-page' %}
+{% block body %}
+    {{ parent() }}
+    {% block content %}
+
+        <div class="content-page">
+            <!-- ============================================================== -->
+            <!-- Start Content here -->
+            <!-- ============================================================== -->
+            <div class="content">
+                <!-- Page Heading Start -->
+                <div class="page-heading">
+                    <h1><i class='fa fa-envelope'></i>Mensajes</h1>
+                </div>
+                <!-- Page Heading End-->
+
+                <!-- Begin Inbox -->
+                <div class="box-messages">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <!-- Sidebar Message -->
+
+                            <div class="btn-group new-message-btns stacked">
+                                <a href="{{ path('veremail') }}" class="btn btn-primary btn-lg btn-block text-left"><i
+                                            class="icon-left-open-1"></i> Regresar al Inbox</a>
+                            </div>
+                            <div class="list-group menu-message">
+                                <a href="{{ path('veremail') }}" class="list-group-item"><i class="icon-inbox"></i> Inbox <span
+                                            class="badge pull-right"></span></a>
+                                <a href="#fakelink" class="list-group-item"><i class="icon-export"></i> Enviados</a>
+                            </div>
+
+                          {#  <div class="list-group menu-folders">
+                                <a href="#fakelink" class="list-group-item"><i class="fa fa-circle text-red-1"></i> Work</a>
+                                <a href="#fakelink" class="list-group-item"><i class="fa fa-circle text-green-1"></i>
+                                    Social</a>
+                                <a href="#fakelink" class="list-group-item"><i class="fa fa-circle text-blue-1"></i>
+                                    Friends</a>
+                                <a href="#fakelink" class="list-group-item"><i class="fa fa-circle text-orange-3"></i>
+                                    Private</a>
+                                <a href="#fakelink" class="list-group-item"><i
+                                            class="fa fa-circle text-lightblue-2"></i> Family</a>
+                            </div>#}
+                        </div><!-- ENd div .col-md-2 -->
+
+
+                        <div class="col-md-9">
+                            <div class="widget">
+                                <div class="col-sm-12">
+                                    <!-- Begin read message -->
+                                    <!-- Message -->
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <h3 class="semibold">{{ correo.nombre }}.</h3>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="btn-toolbar pull-right" role="toolbar">
+                                               {# <div class="btn-group">
+                                                    <a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip"
+                                                       title="Print"><i class="fa fa-print"></i></a>
+                                                    <a href="#" class="btn btn-sm btn-primary" data-toggle="tooltip"
+                                                       title="Share"><i class="fa fa-share-alt"></i></a>
+                                                </div>#}
+                                                <div class="btn-group">
+                                                    <a href="#" class="btn btn-sm btn-default" data-toggle="tooltip"
+                                                       title="Bookmark"><i class="fa fa-bookmark"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="mail-sender-details">
+                                               {# <img src="images/users/chat/19.jpg" class="img-circle sender-photo">#}
+                                                <small><b>{{ correo.nombre }}</b> para: <span class="text-muted">{{ correo.email }}</span><br><span
+                                                            class="text-muted">{{ correo.fecha|date('short') }}</span>
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <div class="btn-group spaced">
+                                               {# <a class="btn btn-danger"><i class="icon-reply-1"></i> Responder</a>#}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 mail-body">
+                                            <hr>
+                                            <p>
+                                             Asunto:   {{ correo.asunto }}
+                                            </p>
+                                            <p>
+                                                {{ correo.texto }}
+                                            </p>
+
+
+                                            <hr>
+
+                                        </div>
+                                    </div>
+                                  {#  <div class="row">
+                                        <div class="col-sm-12">
+                                            <hr>
+                                            <div class="gallery-wrap">
+                                                <div class="column">
+                                                    <div class="inner">
+                                                        <a title="Image title here" href="images/big/img005.jpg"
+                                                           class="zooming">
+                                                            <div class="img-wrap">
+                                                                <img class="mfp-fade" title="Image title here"
+                                                                     alt="Image gallery"
+                                                                     src="images/small/img005_small.jpg">
+                                                            </div>
+                                                            <div class="caption-static">
+                                                                website-banner-1.jpg (1.264KB)
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="column">
+                                                    <div class="inner">
+                                                        <a title="Image title here" href="images/big/img002.jpg"
+                                                           class="zooming">
+                                                            <div class="img-wrap">
+                                                                <img class="mfp-fade" title="Image title here"
+                                                                     alt="Image gallery"
+                                                                     src="images/small/img002_small.jpg">
+                                                            </div>
+                                                            <div class="caption-static">
+                                                                website-banner-2.jpg (2.033KB)
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>#}
+                                </div>
+                            </div>
+                        </div><!-- End div .col-md-10 -->
+                    </div><!-- End div .row -->
+                </div><!-- End div .box-info -->
+                <!-- End inbox -->
+
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End content here -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- End right content -->
+    {% endblock %}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+{% endblock %}

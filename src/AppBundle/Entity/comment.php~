@@ -1,0 +1,247 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * comment
+ *
+ * @ORM\Table(name="comment")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\commentRepository")
+ */
+class comment
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="post", inversedBy="comment")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
+     */
+    private $postcomment;
+
+
+
+
+
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="string", length=255)
+     */
+    private $comment;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=255)
+     */
+    private $status;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetimetz")
+     */
+    private $date;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="photo", type="string", length=255, nullable=true)
+     */
+    private $photo;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     *
+     * @return comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return comment
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return comment
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     *
+     * @return comment
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+
+    /**
+     * Set postcomment
+     *
+     * @param \int $postcomment
+     *
+     * @return comment
+     */
+    public function setPostcomment($postcomment)
+    {
+        $this->postcomment= $postcomment;
+
+        return $this;
+    }
+
+
+    /**
+     * Get postcomment
+     *
+     * @return string
+     */
+    public function getPostcomment()
+    {
+        return $this->postcomment;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param \string $nombre
+     *
+     * @return comment
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+
+    /**
+     * Get nombre
+     *
+     * @return string
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+    /**
+     * Set email
+     *
+     * @param \string $email
+     *
+     * @return comment
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+
+}

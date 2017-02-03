@@ -1,0 +1,130 @@
+{% extends '::newadmin.html.twig' %}
+{% block title %}Nuevo Post{% endblock %}
+{% block class 'fixed-left login-page' %}
+{% block body %}
+    {{ parent() }}
+    {% block content %}
+        <div class="content-page">
+            <!-- ============================================================== -->
+            <!-- Start Content here -->
+            <!-- ============================================================== -->
+            <div class="content">
+                <!-- Page Heading Start -->
+                <div class="page-heading">
+                    <h1><i class='fa fa-magic'></i> Crear Post</h1>
+                    <h3>¿Tienes un Nuevo post?</h3></div>
+                <!-- Page Heading End-->
+                <div class="row">
+                    <div class="col-md-12 portlets">
+                        <!-- Your awesome content goes here -->
+                        <div class="widget animated fadeInDown">
+                            <form action="{{ path('nuevopost') }}" method="post" id="myWizard" role="form"
+                                  enctype="multipart/form-data">
+                                <section class="step" data-step-title="Datos">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="inputEmail">Titulo</label>
+                                                {{ form_widget(form.titulo,{'attr':{'class':'form-control','required':'required','placeholder':'ingrese el titulo del post'}}) }}
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail">Contenido</label>
+                                                {{ form_widget(form.contenido,{'attr':{  'required':'required','class':'form-control','placeholder':'Ingrese el contenido del post','rows':'20'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="notes">
+                                                <h4><strong>Nota</strong></h4>
+                                                <p style="text-align: justify">
+                                                    Recuerde que todos los campos deben estar completo.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="step" data-step-title="Seleccione las Categoria">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="inputUsername">Categoria</label>
+                                                <select multiple class="form-control" name="categoria" id="categoria">
+                                                    <option value="1">Equipos</option>
+                                                    <option value="2">tecnologia</option>
+                                                    <option value="3">ventas</option>
+                                                    <option value="4">mercadeo</option>
+                                                    <option value="5">outsorcing</option>
+                                                    <option value="6">servicios</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputUsername">Seccion del Post</label>
+                                                {{ form_widget(form.seccion,{'attr':{  'required':'required','class':'form-control'}}) }}
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-sm-6">
+                                            <div class="notes">
+                                                <h4><strong>Nota</strong> rapida</h4>
+                                                <p style="text-align: justify">
+                                                    Puede seleccionar una categoria para su post
+                                                </p>
+                                                <p> Recuerde que la <strong> seccion del post</strong> es donde estara ubicado en la
+                                                    pantalla principal del blog</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="step" data-step-title="Elija una Imagen">
+                                    <!-- Page Heading Start -->
+                                    <div class="page-heading">
+                                        <h1><i class='fa fa-magic'></i> Cargar Imagen</h1>
+                                        {{ form_widget(form.imagen,{'attr':{'class':'form-control','type':'file','multiple data-show-upload':'false'
+                                            ,'data-show-caption':'true'}}) }}
+                                    </div>
+                                    <!-- Page Heading End-->
+                                    <div class="row">
+                                        <div class="col-md-12 portlets">
+                                            {{ form_widget(form._token,{'attr':{'class':'form-control'} ,'type':'hidden' }) }}
+
+                                        </div>
+                                    </div>
+
+                        </div>
+
+                        </section>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Start -->
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End content here -->
+        <!-- ============================================================== -->
+
+        </div>
+        <!-- End right content -->
+
+        </div>
+        <!-- End of page -->
+        <!-- the overlay modal element -->
+        <div class="md-overlay"></div>
+        <!-- End of eoverlay modal -->
+        <script>
+            var resizefunc = [];
+        </script>
+    {% endblock %}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+
+
+
+{% endblock %}
+
+

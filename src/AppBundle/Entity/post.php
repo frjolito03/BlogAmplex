@@ -1,0 +1,299 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * post
+ *
+ * @ORM\Table(name="post")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\postRepository")
+ */
+class post
+{
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="users1", inversedBy="post")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $postuser;
+
+
+
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="user_id", type="integer")
+
+     */
+    private $user_id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contenido", type="string", length=255)
+     */
+    private $contenido;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_publicacion", type="datetimetz")
+     */
+    private $fechaPublicacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="imagen", type="string", length=500)
+     */
+    private $imagen;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titulo", type="string", length=250)
+     */
+
+    private $titulo;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="seccion", type="integer")
+
+     */
+    private $seccion;
+
+
+
+
+
+
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    /**
+     * Set user_id
+     *
+     * @param int $user_id
+     *
+     * @return post
+     */
+    public function setUser_id($user_id)
+    {
+        $this->user_id= $user_id;
+
+        return $this;
+    }
+
+    /**
+     * Get user_id
+     *
+     * @return int
+     */
+    public function getUser_id()
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * Set contenido
+     *
+     * @param string $contenido
+     *
+     * @return post
+     */
+    public function setContenido($contenido)
+    {
+        $this->contenido = $contenido;
+
+        return $this;
+    }
+
+    /**
+     * Get contenido
+     *
+     * @return string
+     */
+    public function getContenido()
+    {
+        return $this->contenido;
+    }
+
+    /**
+     * Set fechaPublicacion
+     *
+     * @param \DateTime $fechaPublicacion
+     *
+     * @return post
+     */
+    public function setFechaPublicacion($fechaPublicacion)
+    {
+        $this->fechaPublicacion = $fechaPublicacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaPublicacion
+     *
+     * @return \DateTime
+     */
+    public function getFechaPublicacion()
+    {
+        return $this->fechaPublicacion;
+    }
+
+    /**
+     * Set imagen
+     *
+     * @param string $imagen
+     *
+     * @return post
+     */
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+
+        return $this;
+    }
+
+    /**
+     * Get imagen
+     *
+     * @return string
+     */
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+
+    /**
+     * Set titulo
+     *
+     * @param string $titulo
+     *
+     * @return post
+     */
+    public function setTitulo($titulo)
+    {
+        $this->titulo = $titulo;
+
+        return $this;
+    }
+
+    /**
+     * Get titulo
+     *
+     * @return string
+     */
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
+
+
+
+
+    /**
+     * Set seccion
+     *
+     * @param string $seccion
+     *
+     * @return post
+     */
+    public function setSeccion($seccion)
+    {
+        $this->seccion = $seccion;
+
+        return $this;
+    }
+
+    /**
+     * Get seccion
+     *
+     * @return string
+     */
+    public function getSeccion()
+    {
+        return $this->seccion;
+    }
+
+    
+
+
+    /**
+     * Set postuser
+     *
+     * @param \int $postuser
+     *
+     * @return post
+     */
+    public function setPostuser($postuser)
+    {
+        $this->postuser= $postuser;
+
+        return $this;
+    }
+
+
+    /**
+     * Get postuser
+     *
+     * @return string
+     */
+    public function getPostuser()
+    {
+        return $this->postuser;
+    }
+
+
+
+
+    /**
+     * Set userId
+     *
+     * @param integer $userId
+     *
+     * @return post
+     */
+    public function setUserId($userId)
+    {
+        $this->user_id = $userId;
+
+        return $this;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return integer
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
+}

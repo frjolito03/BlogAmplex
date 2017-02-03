@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>{% block title %}Admin Blog!{% endblock %}</title>
+    {% block stylesheets %}
+        <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="{{ asset ('bundles/framework/css/bootstrap.min.css') }} "/>
+
+        <!-- Custom CSS -->
+        <link href="{{ asset ('bundles/framework/css/sb-admin.css') }}" rel="stylesheet">
+        <link href="{{ asset ('bundles/framework/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <!-- Morris Charts CSS -->
+
+        <link href="{{ asset ('bundles/framework/css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset ('bundles/framework/css/stilo.css') }}" rel="stylesheet">
+        <link href="{{ asset ('bundles/framework/css/uniform.css') }}" rel="stylesheet">
+        <link href="{{ asset ('bundles/framework/css/notificaciones.css') }}" rel="stylesheet">
+        <link href="{{ asset ('bundles/framework/css/style_light.css') }}" rel="stylesheet">
+        <!-- Custom Fonts -->
+        <link href="{{ asset ('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css') }}"/>
+        <link rel="('stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+        <link href='{{ asset ('http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,400italic,700,700italic') }}' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{{ asset ('//storage.googleapis.com/code.getmdl.io/1.0.1/material.teal-red.min.css') }}" />
+
+
+        <style type="text/css">
+            .tooltip {
+                width: 250px;
+                font-size: 11px;
+                font-family: Arial, sans-serif;
+                background: #444;
+                border: 1px solid #090909;
+                border-radius: 4px;
+                -moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
+                position: absolute;
+                z-index: 1;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+                -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+                -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+                color:#fff;
+                padding:12px 24px;
+                line-height:18px;
+            }
+
+            .tooltip:after {
+                content: '';
+                position: absolute;
+                border-color: transparent  #444 transparent transparent;
+                border-style: solid;
+                border-width: 10px;
+                height: 0;
+                width: 0;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                margin-top: -10px;
+                margin-left: -20px;
+            }
+
+            .tooltip:before {
+                content: '';
+                position: absolute;
+                border-color:   transparent #090909 transparent transparent;
+                border-style: solid;
+                border-width: 10px;
+                height: 0;
+                width: 0;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                margin-top: -10px;
+                margin-left: -20px;
+            }
+
+
+
+            .ttw-notification-menu{
+                width: 276px;
+            }
+
+        </style>
+
+    {% endblock %}
+
+
+
+
+
+    <link rel="shortcut icon" href="{{ asset('b.ico') }}" />
+</head>
+<body>
+
+
+{% block body %}
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('index') }}">AmplexBlog! Admin</a>
+        </div>
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+            <li class="dropdown">
+                {# area de count de las notificaciones #}
+
+              <div id="contmensjae" class="hidden" style="width: 20px; height: 20px; border-radius: 20px; background: red;">
+                    <div id="totalmen" style="color: #fff; text-align: center">1</div>
+                </div>
+
+
+                <a id="amensaje" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="
+                 padding-top: 0px;
+                  padding-left: 0px;
+                     padding-bottom: 0px;
+                          padding-right: 0px;
+
+">
+
+                    <i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                <ul class="dropdown-menu message-dropdown">
+                    {% for mensajes in mensajes %}
+                        <li  id="{{ mensajes.id }}">
+                    <li class="message-preview">
+                        <a href="#">
+                            <div id="{{ mensajes.id }}" class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                <div class="media-body">
+                                    <h5 class="media-heading"><strong>  {{ mensajes.nombre }}</strong>
+                                    </h5>
+                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> {{ mensajes.fecha|date('short') }}</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                </div>
+                            </div>
+
+                        </a>
+
+                    </li>
+                    {% endfor %}
+                    </li>
+                    <li class="message-footer">
+                        <a href="#">Leer Todos los mensajes</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <div id="contalert" class="hidden" style="width: 20px; height: 20px; border-radius: 20px; background: red;">
+                    <div id="totalert" style="color: #fff; text-align: center"> </div>
+                </div>
+                <a id="aalert" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="
+        padding-top: 0px;
+        padding-left: 5px;
+        padding-bottom: 0px;
+                        ">
+                    <i class="fa fa-bell"></i> <b class="caret" style="
+                padding-top: 0px;
+                padding-left: 5px;">
+                    </b></a>
+                <ul class="dropdown-menu alert-dropdown">
+                    <li>
+                        <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#">View All</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{  app.session.get('nombre') }} <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-user"></i> Perfil  {{  app.session.get('id') }}</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-envelope"></i>correo</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-gear"></i> Opciones</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="{{ path('logaout') }}"><i class="fa fa-fw fa-power-off"></i> Salir</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="active">
+                    <a href="{{ path('index') }}"><i class="fa fa-fw fa-dashboard"></i> Portada</a>
+                </li>
+                <li>
+                    <a href="{{ path('todopost') }}"><i class="fa fa-fw fa-bar-chart-o"></i>Top post</a>
+                </li>
+                <li>
+                    <a href="{{ path('listpost') }}"><i class="fa fa-fw fa-table"></i> Listas de post</a>
+                </li>
+                <li>
+                    <a href="{{ path('newpost') }}"><i class="fa fa-fw fa-edit"></i> Crear post</a>
+                </li>
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="#">Crear categorias</a>
+                        </li>
+                        <li>
+                            <a href="#"></a>
+                        </li>
+                    </ul>
+                </li>
+
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Nuevo Post
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li>
+                            <i class="fa fa-dashboard"></i> <a href="{{ path('index') }}">Portada</a>
+                        </li>
+                        <li class="active">
+                            <i class="fa fa-edit"></i> Inicio
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert alert-info alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <i class="fa fa-info-circle"></i>  <strong>Bienvenido</strong>  <a href="#" class="alert-link">{{  app.session.get('nombre') }} </a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+
+
+
+
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+
+
+    <script src="{{ asset('bundles/framework/js/jquery.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/notificaciones.js') }}"></script>
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ asset('bundles/framework/js/bootbox.min.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/bootstrap.min.js') }}"></script>
+
+    <script src="{{ asset('//storage.googleapis.com/code.getmdl.io/1.0.1/material.min.js') }}"></script>
+   {# <script src="{{ asset('bundles/framework/js/demo.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/main.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/jquery.tools.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/jquery.uniform.min.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/ttw-notification-menu.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/ttw-notification-menu.min.js') }}"></script>
+    <script src="{{ asset('bundles/framework/js/jquery-ui-1.8.14.custom.min.js') }}"></script>#}
+
+
+
+{% endblock %}
+</body>
+</html>
+
+
+
+
